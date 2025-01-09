@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamentos - Tatophew Construções</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #FFA000;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header-banner {
+            background: linear-gradient(rgba(46,125,50,0.9), rgba(46,125,50,0.6)), url('/api/placeholder/1920/300');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .header-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .header-banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filters {
+            background: var(--gray-100);
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filters-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filter-button {
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--primary);
+            border-radius: 4px;
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-button.active,
+        .filter-button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .launches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .launch-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .launch-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .launch-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .launch-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .launch-info {
+            padding: 1.5rem;
+        }
+
+        .launch-category {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .launch-title {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .launch-features {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .launch-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .launch-features i {
+            color: var(--primary);
+        }
+
+        .launch-price {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .launch-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .newsletter {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: #F57C00;
+        }
+
+        @media (max-width: 768px) {
+            .header-banner h1 {
+                font-size: 2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .filters-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-banner">
+        <h1>Lançamentos Exclusivos</h1>
+        <p>Conheça as últimas novidades em materiais de construção e ferramentas para sua obra</p>
+    </div>
+
+    <section class="filters">
+        <div class="filters-container">
+            <div class="filter-group">
+                <button class="filter-button active">Todos</button>
+                <button class="filter-button">Ferramentas</button>
+                <button class="filter-button">Materiais</button>
+                <button class="filter-button">Acabamentos</button>
+                <button class="filter-button">Elétrica</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="launches-grid">
+        <div class="launch-card">
+            <span class="launch-badge">NOVO</span>
+            <img src="/api/placeholder/400/300" alt="Serra Circular" class="launch-image">
+            <div class="launch-info">
+                <span class="launch-category">Ferramentas Elétricas</span>
+                <h3 class="launch-title">Serra Circular Professional Max 1800W</h3>
+                <ul class="launch-features">
+                    <li><i class="fas fa-check"></i> Potência: 1800W</li>
+                    <li><i class="fas fa-check"></i> Velocidade: 5200 RPM</li>
+                    <li><i class="fas fa-check"></i> Garantia: 2 anos</li>
+                </ul>
+                <div class="launch-price">R$ 799,90</div>
+                <div class="launch-actions">
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="launch-card">
+            <span class="launch-badge">NOVO</span>
+            <img src="/api/placeholder/400/300" alt="Revestimento" class="launch-image">
+            <div class="launch-info">
+                <span class="launch-category">Acabamentos</span>
+                <h3 class="launch-title">Revestimento 3D Premium Stone</h3>
+                <ul class="launch-features">
+                    <li><i class="fas fa-check"></i> Material: Porcelanato</li>
+                    <li><i class="fas fa-check"></i> Dimensão: 60x60cm</li>
+                    <li><i class="fas fa-check"></i> Acabamento: Fosco</li>
+                </ul>
+                <div class="launch-price">R$ 189,90/m²</div>
+                <div class="launch-actions">
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="launch-card">
+            <span class="launch-badge">NOVO</span>
+            <img src="/api/placeholder/400/300" alt="Kit Ferramentas" class="launch-image">
+            <div class="launch-info">
+                <span class="launch-category">Ferramentas</span>
+                <h3 class="launch-title">Kit Ferramentas Profissional 150 Peças</h3>
+                <ul class="launch-features">
+                    <li><i class="fas fa-check"></i> Maleta resistente</li>
+                    <li><i class="fas fa-check"></i> Ferramentas cromadas</li>
+                    <li><i class="fas fa-check"></i> Garantia vitalícia</li>
+                </ul>
+                <div class="launch-price">R$ 599,90</div>
+                <div class="launch-actions">
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="launch-card">
+            <span class="launch-badge">NOVO</span>
+            <img src="/api/placeholder/400/300" alt="Painel Solar" class="launch-image">
+            <div class="launch-info">
+                <span class="launch-category">Energia Solar</span>
+                <h3 class="launch-title">Painel Solar Fotovoltaico 450W</h3>
+                <ul class="launch-features">
+                    <li><i class="fas fa-check"></i> Eficiência: 20.5%</li>
+                    <li><i class="fas fa-check"></i> Garantia: 25 anos</li>
+                    <li><i class="fas fa-check"></i> Certificação INMETRO</li>
+                </ul>
+                <div class="launch-price">R$ 1.299,90</div>
+                <div class="launch-actions">
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="launch-card">
+            <span class="launch-badge">NOVO</span>
+            <img src="/api/placeholder/400/300" alt="Tinta Inteligente" class="launch-image">
+            <div class="launch-info">
+                <span class="launch-category">Tintas</span>
+                <h3 class="launch-title">Tinta Inteligente Anti-Mofo 20L</h3>
+                <ul class="launch-features">
+                    <li><i class="fas fa-check"></i> Tecnologia anti-fungos</li>
+                    <li><i class="fas fa-check"></i> Lavável</li>
+                    <li><i class="fas fa-check"></i> Acabamento acetinado</li>
+                </ul>
+                <div class="launch-price">R$ 399,90</div>
+                <div class="launch-actions">
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="launch-card">
+            <span class="launch-badge">NOVO</span>
+            <img src="/api/placeholder/400/300" alt="Smart Switch" class="launch-image">
+            <div class="launch-info">
+                <span class="launch-category">Elétrica</span>
+                <h3 class="launch-title">Interruptor Smart Touch Wi-Fi</h3>
+                <ul class="launch-features">
+                    <li><i class="fas fa-check"></i> Controle por aplicativo</li>
+                    <li><i class="fas fa-check"></i> Compatível com Alexa</li>
+                    <li><i class="fas fa-check"></i> Timer programável</li>
+                </ul>
+                <div class="launch-price">R$ 149,90</div>
+                <div class="launch-actions">
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Fique por dentro dos próximos lançamentos!</h2>
+            <p>Cadastre-se para receber novidades e ofertas exclusivas em primeira mão.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Seu melhor e-mail" required>
+               <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+       
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const launchCards = document.querySelectorAll('.launch-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+             
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+               
+                button.classList.add('active');
+
+                const filterValue = button.textContent.toLowerCase();
+
+                launchCards.forEach(card => {
+                    const category = card.querySelector('.launch-category').textContent.toLowerCase();
+                    
+                    if (filterValue === 'todos' || category.includes(filterValue)) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+   
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input[type="email"]').value;
+            
+           
+            const button = newsletterForm.querySelector('button');
+            const originalText = button.textContent;
+            button.textContent = 'Enviando...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                alert('Obrigado por se cadastrar! Em breve você receberá nossas novidades.');
+                button.textContent = originalText;
+                button.disabled = false;
+                newsletterForm.reset();
+            }, 1500);
+        });
+
+        
+        const favoriteButtons = document.querySelectorAll('.btn-outline');
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const icon = button.querySelector('i');
+                icon.classList.toggle('fas');
+                icon.classList.toggle('far');
+                
+                if (icon.classList.contains('fas')) {
+                    showToast('Produto adicionado aos favoritos!');
+                } else {
+                    showToast('Produto removido dos favoritos!');
+                }
+            });
+        });
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.classList.add('toast');
+            toast.textContent = message;
+            
+         
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.right = '20px';
+            toast.style.backgroundColor = 'var(--primary)';
+            toast.style.color = 'white';
+            toast.style.padding = '1rem 2rem';
+            toast.style.borderRadius = '4px';
+            toast.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            toast.style.transition = 'opacity 0.3s, transform 0.3s';
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            
+            document.body.appendChild(toast);
+            
+           
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateY(0)';
+            }, 100);
+            
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        
+        const launchImages = document.querySelectorAll('.launch-image');
+        
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        launchImages.forEach(img => {
+            img.dataset.src = img.src;
+            img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+            imageObserver.observe(img);
+        });
+
+    
+        const cards = document.querySelectorAll('.launch-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+      
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+      
+        const buyButtons = document.querySelectorAll('.btn-primary');
+        buyButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const originalText = button.textContent;
+                button.textContent = 'Adicionando...';
+                button.style.opacity = '0.7';
+                button.disabled = true;
+
+                setTimeout(() => {
+                    button.textContent = '✓ Adicionado';
+                    button.style.backgroundColor = '#4CAF50';
+                    button.style.opacity = '1';
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.backgroundColor = '';
+                        button.disabled = false;
+                    }, 1500);
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

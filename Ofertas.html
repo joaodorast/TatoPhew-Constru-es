@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatophew Construções - Materiais de Construção</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #4caf50;
+            --secondary: #ffa000;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --gray-100: #f5f5f5;
+            --gray-200: #eeeeee;
+            --gray-300: #e0e0e0;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --radius-sm: 4px;
+            --radius: 8px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: var(--text-dark);
+            background-color: var(--gray-100);
+        }
+
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .header-top-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 600px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .header-action-btn {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .header-action-btn i {
+            font-size: 1.25rem;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(46,125,50,0.9), rgba(46,125,50,0.7)), url('/api/placeholder/1920/600');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 6rem 1rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .products-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow);
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image {
+            position: relative;
+            padding-top: 75%;
+        }
+
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-discount {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: bold;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--primary);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .product-prices {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-old-price {
+            text-decoration: line-through;
+            color: var(--text-light);
+        }
+
+        .product-new-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gray-300);
+            color: var(--text-dark);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1100;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 2rem;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .header-main {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <div class="header-top-content">
+                <div>Frete grátis para compras acima de R$ 999</div>
+                <div>Atendimento: (21) 9999-9999</div>
+            </div>
+        </div>
+        <div class="header-main">
+            <a href="#" class="logo">Tatophew</a>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="O que você procura?">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+            <div class="header-actions">
+                <button class="header-action-btn" onclick="toggleModal('accountModal')">
+                    <i class="fas fa-user"></i>
+                    <span>Conta</span>
+                </button>
+                <button class="header-action-btn" onclick="toggleModal('cartModal')">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Carrinho</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Construa seus sonhos conosco</h1>
+            <p>Os melhores materiais de construção com preços imbatíveis e entrega para todo o Brasil.</p>
+            <button class="btn btn-primary">Ver Ofertas</button>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="section-header">
+            <h2>Ofertas em Destaque</h2>
+            <div class="section-actions">
+                <button class="btn btn-outline">Filtrar</button>
+            </div>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/300/225" alt="Argamassa">
+                    <span class="product-discount">-30%</span>
+                </div>
+                <div class="product-content">
+                    <span class="product-category">Acabamentos</span>
+                    <h3 class="product-title">Argamassa Premium Interna 20kg</h3>
+                    <div class="product-prices">
+                        <span class="product-old-price">R$ 35,90</span>
+                        <span class="product-new-price">R$ 25,13</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary" onclick="addToCart({ title: 'Argamassa Premium Interna 20kg', price: 25.13, image: '/api/placeholder/300/225', quantity: 1 })">Adicionar</button>
+                        <button class="btn btn-outline"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/300/225" alt="Furadeira">
+                    <span class="product-discount">-40%</span>
+                </div>
+                <div class="product-content">
+                    <span class="product-category">Ferramentas</span>
+                    <h3 class="product-title">Furadeira de Impacto Profissional 800W</h3>
+                    <div class="product-prices">
+                        <span class="product-old-price">R$ 399,90</span>
+                        <span class="product-new-price">R$ 239,94</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary" onclick="addToCart({ title: 'Furadeira de Impacto Profissional 800W', price: 239.94, image: '/api/placeholder/300/225', quantity: 1 })">Adicionar</button>
+                        <button class="btn btn-outline"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/300/225" alt="Tinta">
+                    <span class="product-discount">-25%</span>
+                </div>
+                <div class="product-content">
+                    <span class="product-category">Tintas</span>
+                    <h3 class="product-title">Tinta Acrílica Premium 18L</h3>
+                    <div class="product-prices">
+                        <span class="product-old-price">R$ 289,90</span>
+                        <span class="product-new-price">R$ 217,43</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary" onclick="addToCart({ title: 'Tinta Acrílica Premium 18L', price: 217.43, image: '/api/placeholder/300/225', quantity: 1 })">Adicionar</button>
+                        <button class="btn btn-outline"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/300/225" alt="Cimento">
+                    <span class="product-discount">-15%</span>
+                </div>
+                <div class="product-content">
+                    <span class="product-category">Materiais Básicos</span>
+                    <h3 class="product-title">Cimento Portland CP II 50kg</h3>
+                    <div class="product-prices">
+                        <span class="product-old-price">R$ 32,90</span>
+                        <span class="product-new-price">R$ 27,97</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary" onclick="addToCart({ title: 'Cimento Portland CP II 50kg', price: 27.97, image: '/api/placeholder/300/225', quantity: 1 })">Adicionar</button>
+                        <button class="btn btn-outline"><i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="toggleModal('cartModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="modal-title">Seu Carrinho</h2>
+            <div class="cart-items"></div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>R$ 0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <div id="accountModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="toggleModal('accountModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="modal-title">Minha Conta</h2>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" class="form-input" placeholder="Seu e-mail">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Senha</label>
+                    <input type="password" class="form-input" placeholder="Sua senha">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%">Entrar</button>
+            </form>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#" style="color: var(--primary); text-decoration: none;">Criar uma conta</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.title === product.title);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push(product);
+            }
+            updateCartModal();
+            toggleModal('cartModal');
+        }
+
+        function updateCartModal() {
+            const cartItemsContainer = document.querySelector('.cart-items');
+            cartItemsContainer.innerHTML = "";
+
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.title}">
+                    </div>
+                    <div class="cart-item-content">
+                        <h4 class="cart-item-title">${item.title}</h4>
+                        <span class="cart-item-price">R$ ${item.price.toFixed(2)}</span>
+                        <div class="cart-item-quantity">
+                            <button class="btn btn-outline" onclick="updateQuantity('${item.title}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="btn btn-outline" onclick="updateQuantity('${item.title}', 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" onclick="removeFromCart('${item.title}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            document.querySelector('.cart-total span:last-child').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(title) {
+            cart = cart.filter(item => item.title !== title);
+            updateCartModal();
+        }
+
+        function updateQuantity(title, delta) {
+            const item = cart.find(item => item.title === title);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(title);
+                } else {
+                    updateCartModal();
+                }
+            }
+        }
+
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = form.querySelector('input[type="email"]').value;
+                const password = form.querySelector('input[type="password"]').value;
+
+                if(email === "usuario@exemplo.com" && password === "senha") {
+                    alert("Login bem-sucedido!");
+                    toggleModal('accountModal');
+                } else {
+                    alert("Email ou senha incorretos!");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcas Parceiras - Tatophew Construções</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #FFA000;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .top-bar {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .top-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .top-bar-contact {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .top-bar-contact i {
+            margin-right: 0.5rem;
+        }
+
+        header {
+            background: var(--primary);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            max-height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .search-bar {
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 4px;
+            border: none;
+            font-size: 1rem;
+            padding-right: 3rem;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 3rem;
+            background: var(--secondary);
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            color: var(--white);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .header-action {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .header-action i {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .brands-hero {
+            background: linear-gradient(rgba(46,125,50,0.9), rgba(46,125,50,0.6)), url('/api/placeholder/1920/400');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .brands-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .brands-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .brands-filter {
+            background: var(--white);
+            padding: 2rem 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            background: var(--gray-100);
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-button.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .brands-grid {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .brand-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .brand-logo {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+            padding: 2rem;
+        }
+
+        .brand-logo img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            padding: 1.5rem;
+        }
+
+        .brand-info h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .brand-info p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .brand-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .brand-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .brand-category {
+            background: var(--gray-100);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .brand-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .brand-action {
+            flex: 1;
+            padding: 0.8rem;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .brand-action.primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .brand-action.secondary {
+            background: var(--gray-100);
+            color: var(--text-dark);
+        }
+
+        .brand-action:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 4rem 1rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--gray-300);
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: var(--gray-300);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .brands-hero h1 {
+                font-size: 2rem;
+            }
+
+            .brands-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="top-bar-contact">
+                <span><i class="fas fa-phone"></i> (21) 1234-5678</span>
+                <span><i class="fas fa-envelope"></i> contato@tatophew.com.br</span>
+            </div>
+            <div class="top-bar-info">
+                <span><i class="fas fa-clock"></i> Seg - Sáb: 8h às 18h</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="/api/placeholder/200/60" alt="Tatophew Construções Logo" />
+            </a>
+            <div class="search-bar">
+                <input type="text" placeholder="O que você procura?">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-actions">
+                <a href="#" class="header-action">
+                    <i class="fas fa-user"></i>
+                    Minha Conta
+                </a>
+                <a href="#" class="header-action">
+                    <i class="fas fa-heart"></i>
+                    Favoritos
+                </a>
+                <a href="#" class="header-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    Carrinho
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="brands-hero">
+        <h1>Nossas Marcas Parceiras</h1>
+        <p>Trabalhamos com as melhores marcas do mercado para garantir qualidade e confiança em cada produto</p>
+    </section>
+
+    <section class="brands-filter">
+        <div class="filter-container">
+            <button class="filter-button active" data-category="all">Todas as Marcas</button>
+            <button class="filter-button" data-category="ferramentas">Ferramentas</button>
+            <button class="filter-button" data-category="materiais">Materiais Básicos</button>
+            <button class="filter-button" data-category="acabamento">Acabamento</button>
+            <button class="filter-button" data-category="eletrica">Elétrica</button>
+            <button class="filter-button" data-category="hidraulica">Hidráulica</button>
+        </div>
+    </section>
+
+    <div class="brands-grid"></div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Institucional</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Nossa História</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Atendimento</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Trocas e Devoluções</a></li>
+                        <li><a href="#">Fale Conosco</a></li>
+                        <li><a href="#">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Rua João Pessoa, 2567134 - Jardim Primavera, Duque De Caxias - RJ</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(21) 1234-5678</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@tatophew.com.br</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Formas de Pagamento</h3>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa fa-2x"></i>
+                        <i class="fab fa-cc-mastercard fa-2x"></i>
+                        <i class="fab fa-cc-amex fa-2x"></i>
+                        <i class="fab fa-pix fa-2x"></i>
+                        <i class="fas fa-barcode fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Tatophew Construções. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const brandsData = [
+            {
+                name: "Votoran",
+                logo: "/api/placeholder/300/200",
+                description: "Líder no mercado de cimentos, com mais de 80 anos de história e tradição em qualidade.",
+                products: 150,
+                rating: 4.8,
+                categories: ["materiais"],
+                tags: ["Cimento", "Argamassa", "Rejunte"]
+            },
+            {
+                name: "Tigre",
+                logo: "/api/placeholder/300/200",
+                description: "Referência em materiais hidráulicos e tubulações, oferecendo soluções inovadoras há mais de 75 anos.",
+                products: 300,
+                rating: 4.9,
+                categories: ["hidraulica"],
+                tags: ["Tubos", "Conexões", "Acessórios"]
+            },
+            {
+                name: "Bosch",
+                logo: "/api/placeholder/300/200",
+                description: "Excelência em ferramentas elétricas e tecnologia, presente em mais de 150 países.",
+                products: 200,
+                rating: 4.7,
+                categories: ["ferramentas"],
+                tags: ["Ferramentas Elétricas", "Acessórios", "Profissional"]
+            },
+            {
+                name: "Suvinil",
+                logo: "/api/placeholder/300/200",
+                description: "A marca mais reconhecida em tintas decorativas no Brasil, com ampla variedade de cores e acabamentos.",
+                products: 250,
+                rating: 4.6,
+                categories: ["acabamento"],
+                tags: ["Tintas", "Vernizes", "Texturas"]
+            },
+            {
+                name: "Tramontina",
+                logo: "/api/placeholder/300/200",
+                description: "Tradição em ferramentas manuais e utensílios, com qualidade reconhecida mundialmente.",
+                products: 400,
+                rating: 4.8,
+                categories: ["ferramentas"],
+                tags: ["Ferramentas Manuais", "Jardinagem", "Utensílios"]
+            },
+            {
+                name: "Lorenzetti",
+                logo: "/api/placeholder/300/200",
+                description: "Líder em soluções para aquecimento de água e materiais elétricos.",
+                products: 180,
+                rating: 4.7,
+                categories: ["eletrica", "hidraulica"],
+                tags: ["Chuveiros", "Aquecedores", "Metais"]
+            }
+        ];
+
+        function renderBrands(brands) {
+            const brandsGrid = document.querySelector('.brands-grid');
+            brandsGrid.innerHTML = brands.map(brand => `
+                <div class="brand-card" data-categories='${JSON.stringify(brand.categories)}'>
+                    <div class="brand-logo">
+                        <img src="${brand.logo}" alt="${brand.name}">
+                    </div>
+                    <div class="brand-info">
+                        <h3>${brand.name}</h3>
+                        <p>${brand.description}</p>
+                        <div class="brand-stats">
+                            <div class="brand-stat">
+                                <i class="fas fa-box"></i>
+                                <span>${brand.products} produtos</span>
+                            </div>
+                            <div class="brand-stat">
+                                <i class="fas fa-star"></i>
+                                <span>${brand.rating}</span>
+                            </div>
+                        </div>
+                        <div class="brand-categories">
+                            ${brand.tags.map(tag => `
+                                <span class="brand-category">${tag}</span>
+                            `).join('')}
+                        </div>
+                        <div class="brand-actions">
+                            <a href="#" class="brand-action primary">Ver Produtos</a>
+                            <a href="#" class="brand-action secondary">Mais Informações</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderBrands(brandsData);
+
+        const filterButtons = document.querySelectorAll('.filter-button');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const category = button.dataset.category;
+                const filteredBrands = category === 'all' 
+                    ? brandsData
+                    : brandsData.filter(brand => brand.categories.includes(category));
+
+                renderBrands(filteredBrands);
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.brand-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
