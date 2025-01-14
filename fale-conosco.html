@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fale Conosco - Tatophew Construções</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #FFA000;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --error: #dc3545;
+            --success: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .contact-hero {
+            background: linear-gradient(rgba(46,125,50,0.9), rgba(46,125,50,0.8)), url('/api/placeholder/1920/400');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .contact-info-section {
+            background: var(--white);
+            padding: 4rem 1rem;
+        }
+
+        .contact-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--gray-100);
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-content {
+            padding: 4rem 1rem;
+            background: var(--gray-100);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .contact-text {
+            color: var(--text-dark);
+        }
+
+        .contact-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .contact-text p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .business-hours {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .business-hours h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .faq-section {
+            padding: 4rem 1rem;
+            background: var(--white);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1rem;
+            background: var(--gray-100);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .map-section {
+            height: 400px;
+            background: var(--gray-200);
+        }
+
+        .map-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .success-message, .error-message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .error-message {
+            background: var(--error);
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="contact-hero">
+        <h1 class="hero-title">Fale Conosco</h1>
+        <p class="hero-subtitle">Estamos aqui para ajudar! Entre em contato conosco e nossa equipe terá prazer em atendê-lo.</p>
+    </section>
+
+    <section class="contact-info-section">
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fas fa-phone contact-icon"></i>
+                <h3>Telefone</h3>
+                <p>(21) 1234-5678</p>
+                <p>(21) 98686-3072</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-envelope contact-icon"></i>
+                <h3>E-mail</h3>
+                <p>contato@tatophew.com.br</p>
+                <p>vendas@tatophew.com.br</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt contact-icon"></i>
+                <h3>Endereço</h3>
+                <p>Rua João Pessoa, 2567134</p>
+                <p>Jardim Primavera - Duque De Caxias - RJ</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-content">
+        <div class="contact-container">
+            <div class="contact-text">
+                <h2>Como Podemos Ajudar?</h2>
+                <p>Na Tatophew Construções, valorizamos o relacionamento com nossos clientes e parceiros. Estamos sempre prontos para ouvir suas dúvidas, sugestões ou reclamações.</p>
+                <p>Nossa equipe de atendimento está disponível para fornecer todo o suporte necessário, seja para informações sobre produtos, orçamentos ou assistência técnica.</p>
+                
+                <div class="business-hours">
+                    <h3>Horário de Atendimento</h3>
+                    <ul class="hours-list">
+                        <li>
+                            <span>Segunda a Sexta</span>
+                            <span>8h às 18h</span>
+                        </li>
+                        <li>
+                            <span>Sábado</span>
+                            <span>8h às 18h</span>
+                        </li>
+                        <li>
+                            <span>Domingo</span>
+                            <span>8h às 12h</span>
+                        </li>
+                        <li>
+                            <span>Feriados</span>
+                            <span>8h às 12h</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <div class="success-message">Mensagem enviada com sucesso! Em breve entraremos em contato.</div>
+                <div class="error-message">Erro ao enviar mensagem. Por favor, tente novamente.</div>
+                
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nome Completo*</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail*</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Telefone*</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Assunto*</label>
+                            <select id="subject" class="form-control" required>
+                                <option value="">Selecione um assunto</option>
+                                <option value="duvida">Dúvida sobre Produto</option>
+                                <option value="orcamento">Solicitar Orçamento</option>
+                                <option value="suporte">Suporte Técnico</option>
+                                <option value="reclamacao">Reclamação</option>
+                                <option value="sugestao">Sugestão</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensagem*</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="section-title">
+                <h2>Perguntas Frequentes</h2>
+                <p>Encontre respostas rápidas para as dúvidas mais comuns</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Qual o prazo de entrega dos produtos?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        O prazo de entrega varia de acordo com a região e a disponibilidade dos produtos. Em geral, para a região do Rio de Janeiro, realizamos entregas em até 48 horas úteis após a confirmação do pagamento.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Como funciona a política de trocas e devoluções?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Aceitamos trocas e devoluções em até 7 dias após o recebimento do produto, desde que o mesmo esteja em sua embalagem original e não tenha sido utilizado. Entre em contato com nossa central de atendimento para iniciar o processo.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Quais são as formas de pagamento aceitas?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Aceitamos pagamentos via cartão de crédito, débito, transferência bancária, boleto, e também PIX. Entre em contato para mais informações sobre condições especiais.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Vocês oferecem suporte técnico?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Sim, oferecemos suporte técnico especializado para todos os nossos produtos. Nosso time está disponível de segunda a sexta para ajudar com dúvidas e assistência.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.645021531206!2d-43.289271925764365!3d-22.83018028278259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x99645a3c3c3c3c3%3A0x123456789abcdef!2sRua%20Jo%C3%A3o%20Pessoa%2C%20Jardim%20Primavera%2C%20Duque%20de%20Caxias%20-%20RJ!5e0!3m2!1spt-BR!2sbr!4v1673430902160!5m2!1spt-BR!2sbr"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+    </section>
+    
+    
+    <footer style="background: var(--primary-dark); color: var(--white); padding: 2rem 1rem;">
+        <div class="footer-content" style="text-align: center;">
+            <p>&copy; 2025 Tatophew Construções. Todos os direitos reservados.</p>
+            <p>Feito com <i class="fas fa-heart" style="color: var(--secondary);"></i> no Rio de Janeiro.</p>
+            <ul style="list-style: none; padding: 0; display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+                <li>
+                    <a href="#" style="color: var(--white); text-decoration: none;"><i class="fab fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="#" style="color: var(--white); text-decoration: none;"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="#" style="color: var(--white); text-decoration: none;"><i class="fab fa-instagram"></i></a>
+                </li>
+                <li>
+                    <a href="#" style="color: var(--white); text-decoration: none;"><i class="fab fa-linkedin"></i></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const faqItem = item.parentNode;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        const form = document.getElementById('contactForm');
+        const successMessage = document.querySelector('.success-message');
+        const errorMessage = document.querySelector('.error-message');
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const isValid = [...formData.values()].every(value => value.trim() !== '');
+
+            if (isValid) {
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                form.reset();
+            } else {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

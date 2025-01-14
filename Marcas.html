@@ -80,8 +80,10 @@
         }
 
         .logo img {
-            max-height: 60px;
-            width: auto;
+            position: relative;
+            max-height: 250px;
+            width: 150px;
+            right: 65px;
             object-fit: contain;
         }
 
@@ -414,7 +416,7 @@
     <header>
         <div class="header-container">
             <a href="#" class="logo">
-                <img src="/api/placeholder/200/60" alt="Tatophew Construções Logo" />
+                <img src="img/tatophewlogo.png" alt="Tatophew Construções Logo" />
             </a>
             <div class="search-bar">
                 <input type="text" placeholder="O que você procura?">
@@ -455,6 +457,9 @@
 
     <div class="brands-grid"></div>
 
+    
+    
+
     <footer>
         <div class="footer-container">
             <div class="footer-grid">
@@ -470,10 +475,10 @@
                 <div class="footer-section">
                     <h3>Atendimento</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Central de Ajuda</a></li>
-                        <li><a href="#">Trocas e Devoluções</a></li>
-                        <li><a href="#">Fale Conosco</a></li>
-                        <li><a href="#">Perguntas Frequentes</a></li>
+                        <li><a href="Central-de-Ajuda.html">Central de Ajuda</a></li>
+                        <li><a href="trocas_e_devoluções.html">Trocas e Devoluções</a></li>
+                        <li><a href="fale-conosco.html">Fale Conosco</a></li>
+                        <li><a href="faq.html">Perguntas Frequentes</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -519,8 +524,8 @@
     <script>
         const brandsData = [
             {
-                name: "Votoran",
-                logo: "/api/placeholder/300/200",
+                name: "Votorantim",
+                logo: "img/votorantimlogo.png",
                 description: "Líder no mercado de cimentos, com mais de 80 anos de história e tradição em qualidade.",
                 products: 150,
                 rating: 4.8,
@@ -529,7 +534,7 @@
             },
             {
                 name: "Tigre",
-                logo: "/api/placeholder/300/200",
+                logo: "img/tigrelogo.png",
                 description: "Referência em materiais hidráulicos e tubulações, oferecendo soluções inovadoras há mais de 75 anos.",
                 products: 300,
                 rating: 4.9,
@@ -538,7 +543,7 @@
             },
             {
                 name: "Bosch",
-                logo: "/api/placeholder/300/200",
+                logo: "img/boschlogo.png",
                 description: "Excelência em ferramentas elétricas e tecnologia, presente em mais de 150 países.",
                 products: 200,
                 rating: 4.7,
@@ -547,7 +552,7 @@
             },
             {
                 name: "Suvinil",
-                logo: "/api/placeholder/300/200",
+                logo: "img/suvinillogo.png",
                 description: "A marca mais reconhecida em tintas decorativas no Brasil, com ampla variedade de cores e acabamentos.",
                 products: 250,
                 rating: 4.6,
@@ -556,7 +561,7 @@
             },
             {
                 name: "Tramontina",
-                logo: "/api/placeholder/300/200",
+                logo: "img/tramontina-ogo.png",
                 description: "Tradição em ferramentas manuais e utensílios, com qualidade reconhecida mundialmente.",
                 products: 400,
                 rating: 4.8,
@@ -565,7 +570,7 @@
             },
             {
                 name: "Lorenzetti",
-                logo: "/api/placeholder/300/200",
+                logo: "img/lorenzettilogo.png",
                 description: "Líder em soluções para aquecimento de água e materiais elétricos.",
                 products: 180,
                 rating: 4.7,

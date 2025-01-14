@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trocas e Devoluções - Tatophew Construções</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #FFA000;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .top-bar {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .top-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-title {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .info-section {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--text-dark);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .info-section p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .info-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .info-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .info-list li::before {
+            content: "\f054";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 4px;
+            font-size: 0.8rem;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .process-card {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .process-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .process-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .process-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .alert-box {
+            background: #FFF3E0;
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .alert-box h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-box p {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .contact-section {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .contact-section h3 {
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--white);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: transform 0.3s;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .faq-section {
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            border: 1px solid var(--gray-300);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            padding: 1rem;
+            background: var(--gray-100);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .contact-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="top-bar-contact">
+                <span><i class="fas fa-phone"></i> (21) 1234-5678</span>
+                <span><i class="fas fa-envelope"></i> contato@tatophew.com.br</span>
+            </div>
+            <div class="top-bar-info">
+                <span><i class="fas fa-clock"></i> Seg - Sáb: 8h às 18h</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <h1 class="page-title">Política de Trocas e Devoluções</h1>
+
+        <section class="info-section">
+            <h2>Nosso Compromisso com Você</h2>
+            <p>Na Tatophew Construções, nos empenhamos em fornecer produtos de alta qualidade e garantir a satisfação total dos nossos clientes. Nossa política de trocas e devoluções foi desenvolvida para proporcionar um processo simples e transparente, seguindo as diretrizes do Código de Defesa do Consumidor.</p>
+            
+            <div class="alert-box">
+                <h4>Prazo para Desistência da Compra</h4>
+                <p>Você tem até 7 (sete) dias corridos, a contar da data do recebimento do produto, para exercer o direito de arrependimento em compras realizadas pela internet ou telefone.</p>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Processo de Troca e Devolução</h2>
+            
+            <div class="process-grid">
+                <div class="process-card">
+                    <i class="fas fa-box-open"></i>
+                    <h4>1. Avaliação do Produto</h4>
+                    <p>Verifique as condições do produto assim que recebê-lo, garantindo que está conforme o pedido.</p>
+                </div>
+                
+                <div class="process-card">
+                    <i class="fas fa-headset"></i>
+                    <h4>2. Entre em Contato</h4>
+                    <p>Comunique nossa Central de Atendimento sobre a necessidade de troca ou devolução.</p>
+                </div>
+                
+                <div class="process-card">
+                    <i class="fas fa-truck"></i>
+                    <h4>3. Coleta do Produto</h4>
+                    <p>Organizaremos a retirada do produto no endereço informado.</p>
+                </div>
+                
+                <div class="process-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>4. Finalização</h4>
+                    <p>Após a avaliação, realizaremos a troca ou o reembolso conforme solicitado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Condições para Troca ou Devolução</h2>
+            
+            <h3>Produtos Elegíveis</h3>
+            <ul class="info-list">
+                <li>Produtos com defeito de fabricação</li>
+                <li>Produtos diferentes do solicitado</li>
+                <li>Produtos danificados durante o transporte</li>
+                <li>Arrependimento da compra dentro do prazo legal</li>
+            </ul>
+
+            <h3>O Produto Deve:</h3>
+            <ul class="info-list">
+                <li>Estar em sua embalagem original</li>
+                <li>Conter todos os acessórios e manuais</li>
+                <li>Não apresentar sinais de uso</li>
+                <li>Estar acompanhado da nota fiscal</li>
+            </ul>
+
+            <div class="alert-box">
+                <h4>Atenção</h4>
+                <p>Alguns produtos não são elegíveis para troca ou devolução por questões de segurança e higiene, como: tintas já abertas, produtos personalizados ou cortados sob medida.</p>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Reembolso</h2>
+            <p>O reembolso será realizado após a avaliação do produto devolvido, nas seguintes formas:</p>
+            <ul class="info-list">
+                <li>Cartão de Crédito: Estorno em até 2 faturas</li>
+                <li>Boleto/PIX: Reembolso via transferência bancária em até 10 dias úteis</li>
+                <li>Crédito na Loja: Disponível imediatamente após a aprovação da devolução</li>
+            </ul>
+        </section>
+
+        <section class="contact-section">
+            <h3>Precisa Solicitar uma Troca ou Devolução?</h3>
+            <p>Nossa equipe está pronta para te ajudar!</p>
+            <div class="contact-buttons">
+                <a href="#" class="contact-button">
+                    <i class="fas fa-headset"></i>
+                    Central de Atendimento
+                </a>
+                <a href="#" class="contact-button">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp
+                </a>
+                <a href="#" class="contact-button">
+                    <i class="fas fa-envelope"></i>
+                    E-mail
+                </a>
+            </div>
+        </section>
+
+        <section class="info-section faq-section">
+            <h2>Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>Qual o prazo para solicitar a troca?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Para compras online, você tem 7 dias corridos após o recebimento. Para produtos com defeito, o prazo é de 30 dias para produtos não duráveis e 90 dias para produtos duráveis.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>Quem paga o frete da devolução?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Em casos de defeito, erro no envio ou arrependimento dentro do prazo legal, a Tatophew Construções arca com os custos do frete de devolução.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>Como solicitar a troca de um produto?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Entre em contato com nossa Central de Atendimento por telefone, WhatsApp ou e-mail. Tenha em mãos o número do pedido e a nota fiscal para agilizar o processo.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                answer.classList.toggle('active');
+                icon.classList.toggle('fa-chevron-up');
+                icon.classList.toggle('fa-chevron-down');
+            });
+        });
+    </script>
+</body>
+</html>
